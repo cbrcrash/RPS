@@ -16,35 +16,42 @@ function resetScore() {
 
 // Play the game
 function playGame(playerChoice) {
-  // Get the computer's choice
-  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  let choice = `You chose ${playerChoice}, Computer chose ${computerChoice}, `;
+  if (!([undefined, null].includes(playerChoice) || playerChoice.length == 0) && choices.includes(playerChoice.toLowerCase())){
+    // Get the computer's choice
+    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    let choice = `You chose ${playerChoice}, Computer chose ${computerChoice}, `;
 
-  // Determine the winner
-  if (playerChoice === computerChoice) {
-      document.getElementById("messagebox").textContent = `You both chose ${computerChoice}, Tie round!`;
-  } else if (
-    (playerChoice === "rock" && computerChoice === "scissors") ||
-    (playerChoice === "paper" && computerChoice === "rock") ||
-    (playerChoice === "scissors" && computerChoice === "paper")
-  ) {
-    wins++;
-    if (wins < 5) {
-      document.getElementById("messagebox").textContent = `${choice} You won this round!`;
+    // Determine the winner
+    if (playerChoice === computerChoice) {
+        document.getElementById("messagebox").textContent = `You both chose ${computerChoice}, Tie round!`;
+    } else if (
+      (playerChoice === "rock" && computerChoice === "scissors") ||
+      (playerChoice === "paper" && computerChoice === "rock") ||
+      (playerChoice === "scissors" && computerChoice === "paper")
+    ) {
+      wins++;
+      if (wins < 5) {
+        document.getElementById("messagebox").textContent = `${choice} You won this round!`;
+      } else {
+        document.getElementById("messagebox").textContent = `${choice} You won this game!`;
+        resetScore()
+      }
     } else {
-      document.getElementById("messagebox").textContent = `${choice} You won this game!`;
-      resetScore()
+      losses++;
+      if (losses < 5) {
+        document.getElementById("messagebox").textContent = `${choice} Computer won this round!`;
+      } else {
+        document.getElementById("messagebox").textContent = `${choice} Computer won this game!`;
+        resetScore()
+      }
     }
+
+    // Update the score display
+    updateScore();
   } else {
-    losses++;
-    if (losses < 5) {
-      document.getElementById("messagebox").textContent = `${choice} Computer won this round!`;
-    } else {
-      document.getElementById("messagebox").textContent = `${choice} Computer won this game!`;
-      resetScore()
-    }
-  }
+    if ([undefined, null].includes(playerChoice) || playerChoice.length == 0) {
 
-  // Update the score display
-  updateScore();
+    }
+    document.getElementById("messagebox").textContent = `Only rock, paper or scissors are valid choices; please try again.`;
+  }
 }

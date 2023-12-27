@@ -11,9 +11,16 @@
     <div id="game-container">
       <h1>Rock-Paper-Scissors</h1>
       <h2 id="messagebox"></h2>
-      <button id="rock" onclick="playGame('rock');">Rock</button>
-      <button id="paper" onclick="playGame('paper');">Paper</button>
-      <button id="scissors" onclick="playGame('scissors');">Scissors</button>
+
+      <button id="rock" onclick="playGame('rock');">
+        <img src="rock.svg" alt="Rock">
+      </button>
+      <button id="paper" onclick="playGame('paper');">
+        <img src="paper.svg" alt="Paper">
+      </button>
+      <button id="scissors" onclick="playGame('scissors');">
+        <img src="scissors.svg" alt="Scissors">
+      </button>
       <div id="score-container">
         <span>Wins:</span>
         <span id="wins">0</span>
